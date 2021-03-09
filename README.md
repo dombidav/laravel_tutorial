@@ -1,85 +1,211 @@
-# Prerequisites:
-The following programs are needed:
+<!--
+*** Thanks for checking out the Best-README-Template. If you have a suggestion
+*** that would make this better, please fork the repo and create a pull request
+*** or simply open an issue with the tag "enhancement".
+*** Thanks again! Now go create something AMAZING! :D
+-->
+
+
+
+<!-- PROJECT SHIELDS -->
+<!--
+*** I'm using markdown "reference style" links for readability.
+*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
+*** See the bottom of this document for the declaration of the reference variables
+*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
+*** https://www.markdownguide.org/basic-syntax/#reference-style-links
+-->
+
+<!-- PROJECT LOGO -->
+<br />
+<p align="center">
+  <a href="https://github.com/dombidav/laravel_tutorial">
+   <img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400">
+  </a>
+
+<h3 align="center">Laravel Crash Course</h3>
+
+  <p align="center">
+    Repository of my Laravel Crash Course
+    <br />
+    <a href="https://github.com/dombidav/laravel_tutorial"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/dombidav/laravel_tutorial">View Demo</a>
+    ·
+    <a href="https://github.com/dombidav/laravel_tutorial/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/dombidav/laravel_tutorial/issues">Request Feature</a>
+  </p>
+
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+    - [Optional: PS-Mod (Windows only)](#optional-ps-mod-windows-only)
+    - [2. Clone this project](#2-clone-this-project)
+    - [3. Create your local environment](#3-create-your-local-environment)
+    - [4. Create your database](#4-create-your-database)
+    - [5. Create your virtual host:](#5-create-your-virtual-host)
+      - [PS-Mod way:](#ps-mod-way)
+      - [Without PS-Mod](#without-ps-mod)
+    - [6. Add your app to your DNS](#6-add-your-app-to-your-dns)
+      - [Windows:](#windows)
+      - [Linux:](#linux)
+    - [7. Set up your laravel app:](#7-set-up-your-laravel-app)
+      - [PS-Mod way:](#ps-mod-way-1)
+      - [Without PS-Mod:](#without-ps-mod-1)
+    - [Done](#done)
+- [License](#license)
+- [Creating a new Resource](#creating-a-new-resource)
+
+
+<!-- GETTING STARTED -->
+# Getting Started
+
+To get a local copy up and running follow these simple steps:
+
+## Prerequisites
 - [(XAMPP recommended)](https://www.apachefriends.org/index.html)
 - php 8.0+ with xdebug extension
 - [composer](https://getcomposer.org/)
 - [node.js](https://nodejs.org/en/)
 - [yarn](https://yarnpkg.com/getting-started/install)
+- [Visual Studio Code](https://code.visualstudio.com/)
 
-## Optional
-On Windows you can use my Powershell script collection.
-> Note: To run ps1 scripts you need to [Allow powershell script execution](https://superuser.com/questions/106360/how-to-enable-execution-of-powershell-scripts)
+### Optional: PS-Mod (Windows only)
+To further simplify your development, you can use my [PS-Mod](https://github.com/ps-mod/ps-mod) Powershell script collection. The PS-Mod itself DOES support almost all Linux distributions and macOS (with [Powershell7](https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell?view=powershell-7.1)), the Laravel package does not (yet). For this reason you can only use it on Windows for now. 
 
-- PS-Mod : https://github.com/ps-mod/ps-mod
-- PS-Mod: Laravel Package: https://github.com/ps-mod/laravel
+1. Open Powershell and run the following:
+    ```powershell
+    Set-ExecutionPolicy Bypass -Scope Process -Force ; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072 ;Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/ps-mod/ps-mod/main/install.ps1'))
+    ```
+   > **Windows:** If you started your powershell as Administrator, this should install `powershellmod` command for all users. If you want to install this for your user only, run powershell normally and you can safely ignore the _"Access Denied"_ errors.
+   
+    > **Linux or Mac:** <u>**_DO NOT_**</u> start `pwsh` with `sudo`. You can safely ignore the _"Access Denied"_ errors.
+2. Start a new powershell (no admin rights needed) and run the following:
+    ```powershell
+   psmod require Laravel 
+   ```
+3. Restart your powershell
+4. Test it with the command `lumen a` if you get `Could not open input file: artisan` message your _PS-Mod: Laravel_ script collection is installed successfully.
 
-> It is recommended to log out and log back in after installing PS-Mod packages
+## Installation
 
-## Install XDebug extension:
-On Windows, open a new powershell, and execute this code:
-```ps
+### 1. Install XDebug
+On windows, open a new powershell, and execute this code:
+```powershell
 php -i | clip ; Start-Process https://xdebug.org/wizard
 ```
 This command already copied php info to your clipboard. Now paste it in the textbox, click "analyse" and follow the instructions.
 
 On Linux or mac go to https://xdebug.org/ and follow the instructions there.
 
-# Initialize a laravel repository
-When you first clone a laravel repository you need to initialize everything
-## Powershell method (Windows only):
-> Note: You don't need to run your powershell as administrator
+### 2. Clone this project
+* Clone this repository to your server directory (ex: `C:/xampp/htdocs/`).
+```sh
+git clone https://github.com/dombidav/laravel_tutorial.git
+```
+* Open a powershell terminal here (On Windows: shift+right click > Open new Powershell terminal here).
 
-Check if your .env.example configured properly.
+### 3. Create your local environment
+* In the source folder (ex. `C:/xampp/htdocs/laravel_tutorial/`) copy the `.env.example` file and rename it to `.env`
+> Note: On Windows this can be problematic depending on your folder settings. To quickly rename it in Powershell you can use the command:
+> ```powershell
+> Copy-Item .env.example .env
+> ```
+* Now configure your `.env` accordingly to your project needs. Do not forget to set your Database name, username and password. 
+> Important: the `APP_URL` variable MUST end with `.test`
 
-1. Create your database (database name should be matching the `DATABASE_NAME` defined in the `.env.example` file)
-2. Open Powershell in the source folder and run `./laravel.ps1 init`. You don't have to wait its completion before continuing (in a new powershell window for example) 
-3. Run `lumen vhosts reg` to register a virtual host in Apache
-4. Run `lumen hosts` to open your hosts file in Visual Studio Code
-5. Add the line `127.0.0.1 myapp.test` (replace *myapp* with your project name obviously) and save it. You will need admin rights for this.
+### 4. Create your database
+* Create a database with the name configured in `.env`.
+> <small>With xampp: Start XAMPP and on the control panel start both Apache and MySQL</small>
 
-Done. You can check out your app on `myapp.test` (configured by your `.env`)
+### 5. Create your virtual host:
+> If you're not using XAMPP consult the documentation of your server on how to create VHost.
 
-## "Classic" method
+#### PS-Mod way:
+* Run the following:
+```powershell
+lumen vhosts reg
+```
 
-1. Copy your `.env.example` file and name it to `.env`
-2. Configure your `.env` per your environment
-3. Create your database (database name should be matching the `DATABASE_NAME` defined in the `.env` file)
-4. Open powershell / cmd / bash in the source folder and run `composer install` you don't need to wait for its completion
-5. Register your virtual host: On xampp, open your vhosts (Default: `C:\xampp\apache\conf\extra\httpd-vhosts.conf` ) file and paste the following:
+> You can check the content of your vhosts file with the command `lumen vhosts`
+
+#### Without PS-Mod
+
+* Open `xampp/apache/conf/extra/httpd-vhosts.conf` file and paste the following to the end of the file:
 ```apacheconf
 <VirtualHost *:80>
-	ServerName local.test
-	DocumentRoot C:\xampp\htdocs
-	SetEnv APPLICATION_ENV "development"
-	<Directory C:\xampp\htdocs>
-		DirectoryIndex index.php
-		AllowOverride All
-		Order allow,deny
-		Allow from all
-	</Directory>
+    ServerName local.test
+    DocumentRoot C:\xampp\htdocs
+    SetEnv APPLICATION_ENV "development"
+    <Directory C:\xampp\htdocs>
+        DirectoryIndex index.php
+        AllowOverride All
+        Order allow,deny
+        Allow from all
+    </Directory>
 </VirtualHost>
 
 <VirtualHost *:80>
-	ServerName myapp.test
-	DocumentRoot C:\xampp\htdocs\myapp\public
-	SetEnv APPLICATION_ENV "development"
-	<Directory C:\xampp\htdocs\myapp\>
-		DirectoryIndex index.php
-		AllowOverride All
-		Order allow,deny
-		Allow from all
-	</Directory>
+    ServerName myapp.test
+    DocumentRoot C:\xampp\htdocs\afp4\src\public
+    SetEnv APPLICATION_ENV "development"
+    <Directory C:\xampp\htdocs\afp4\src\>
+        DirectoryIndex index.php
+        AllowOverride All
+        Order allow,deny
+        Allow from all
+    </Directory>
 </VirtualHost>
 ```
-Change the paths and the ServerName according to your app. Your `DocumentRoot` should point to the `public` folder
-6. Register your DNS to your virtual hosts: On Windows, open your hosts file (`C:\Windows\System32\drivers\etc\hosts`) and paste the following: `127.0.0.1 myapp.test` (replace *myapp* with your project name obviously) and save it. You will need admin rights for this.
-7. After your composer installation is done, install the javascript packages with the command: `yarn`
-8. Compile your SCSS and js files: `yarn run development`
-9. Create your AppKey (this will be used by Laravel for encryption): `php artisan key:generate`
-10. Run your migration and seeders: `php artisan migrate:fresh --seed`
 
-Done. You can check out your app on myapp.test (configured by your .env)
+### 6. Add your app to your DNS
+* Open your HOSTS file
+#### Windows:
+```powershell
+lumen hosts
 
+# Without PS-Mod:
+
+code C:/Windows/System32/drivers/etc/hosts
+```
+
+#### Linux:
+```bash
+sudo code '/etc/hosts'
+# or
+sudo nano '/etc/hosts'
+```
+* At the end of the file add the following line <small>(Obviously replace 'myapp' with your app name)</small>:
+```
+127.0.0.1        myapp.test
+```
+* Save it. You will need Administrator rights to do this.
+* Restart your (Apache) server now
+
+### 7. Set up your laravel app:
+* In your source folder run the following:
+  #### PS-Mod way:
+    ```powershell
+    lumen compose
+    ```
+  #### Without PS-Mod:
+    ```powershell
+    composer install
+    php artisan migrate:fresh --seed
+    yarn
+    yarn run development
+    ```
+  
+### Done
+* You can access your app at the url you have set (ex. `myapp.test`)
+* You can run tests with `php artisan test` or with PS-Mod: `lumen test`
+
+# License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+---
 # Creating a new Resource
 In this example we have a `Product` model
 1. Generate your Model with the console command `php make:model Product --all --resource`
