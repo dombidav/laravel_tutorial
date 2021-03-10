@@ -19,5 +19,3 @@ Route::get('/', function () {
 });
 
 Route::view('home', 'home')->middleware('auth');
-
-Route::resource('product', ProductController::class);
