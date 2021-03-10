@@ -5,8 +5,19 @@
          colors="true"
 >
     <testsuites>
+        <!--TEST SUITES-->
+        <testsuite name="database">
+            <directory suffix=".php">./tests/database/</directory>
+        </testsuite>
+
         <testsuite name="Project Test Suite">
             <directory suffix=".php">./tests</directory>
+        </testsuite>
+        <testsuite name="unit">
+            <directory suffix=".php">./tests/unit/</directory>
+        </testsuite>
+        <testsuite name="feature">
+            <directory suffix=".php">./tests/feature/</directory>
         </testsuite>
     </testsuites>
     <coverage processUncoveredFiles="true">
